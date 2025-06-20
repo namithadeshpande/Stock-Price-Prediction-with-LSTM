@@ -2,9 +2,10 @@ import requests
 import pandas as pd
 
 # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
-API_KEY = 'demo'
+MY_KEY = '3POHM8YSXROCY7DF'
+# API_KEY = "DEMO"
 
-url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SPY&outputsize=full&apikey={API_KEY}'
+url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SPY&outputsize=full&apikey={MY_KEY}'
 r = requests.get(url)
 data = r.json()
 
