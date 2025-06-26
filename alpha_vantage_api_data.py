@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import datetime
 import os
 
+#AlphaVantage API to get Stock Data 
 # Get API key from environment variable
 MY_KEY = "3POHM8YSXROCY7DF"
 if not MY_KEY:
@@ -56,6 +57,7 @@ csv_file = "daily_SPY_stock_data.csv"
 if os.path.exists(csv_file):
     # Load the existing data
     existing_data = pd.read_csv(csv_file)
+    existing_data["Date"] = pd.to_datetime(existing_data["Date"])
 
     # Append new rows to the existing data
     combined_data = pd.concat([existing_data, df]).drop_duplicates(subset="Date").sort_values(by="Date")
