@@ -5,7 +5,7 @@ import os
 
 #AlphaVantage API to get Stock Data 
 # Get API key from environment variable
-MY_KEY = "3POHM8YSXROCY7DF"
+MY_KEY = "your_key"
 if not MY_KEY:
     print("Error: API key not found. Set the ALPHA_VANTAGE_API_KEY environment variable.")
     exit()
