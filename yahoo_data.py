@@ -7,7 +7,7 @@ import pandas_market_calendars as mcal
 from datetime import datetime, timedelta
 
 # --- Config ---
-CSV_PATH = "spy_yahoo_daily_data.csv"
+CSV_PATH = "spy_yf_daily_data.csv"
 TICKER = "SPY"
 START_DATE = "2000-01-01"
 COLUMNS = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
