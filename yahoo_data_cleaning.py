@@ -12,7 +12,7 @@ stock_pd = pd.read_csv(csv_file, parse_dates=['Date'], index_col='Date')
 stock_pd = stock_pd[(stock_pd.index >= START_DATE) & (stock_pd.index <= END_DATE)]
 
 # Display the filtered DataFrame
-print(stock_pd.head())
+print(stock_pd.tail())
 print(stock_pd.columns.to_list())
 
 
