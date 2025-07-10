@@ -1,8 +1,7 @@
-#WIP
 import pandas as pd
 from datetime import datetime
 
-csv_file = "spy_yahoo_daily_data.csv"
+csv_file = "spy_yf_daily_data.csv"
 
 START_DATE = '2001-01-01'
 END_DATE = datetime.today().strftime('%Y-%m-%d')  
