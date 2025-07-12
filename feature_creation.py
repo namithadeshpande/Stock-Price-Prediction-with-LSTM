@@ -18,17 +18,20 @@ stock_pd = stock_pd.sort_index()
 
 #Additional features for LSTM
 # --- Momentum Indicators ---
+# Daily % change in closing price (momentum)
 stock_pd['returns'] = stock_pd['Close'].pct_change()
+
+# Logarithmic daily returns
 stock_pd['log_returns'] = np.log(stock_pd['Close'] / stock_pd['Close'].shift(1))
 
-# RSI (14-day)
+# RSI (14-day) - 14-day Relative Strength Index (measures overbought/oversold conditions)
 stock_pd['rsi_14'] = RSIIndicator(close=stock_pd['Close'], window=14).rsi()
 
-# MACD
+# MACD 
 macd = MACD(close=stock_pd['Close'])
-stock_pd['macd'] = macd.macd()
-stock_pd['macd_signal'] = macd.macd_signal()
-stock_pd['macd_diff'] = macd.macd_diff()
+stock_pd['macd'] = macd.macd() # MACD line = 12-EMA minus 26-EMA
+stock_pd['macd_signal'] = macd.macd_signal() # Signal line = 9-EMA of MACD line
+stock_pd['macd_diff'] = macd.macd_diff() # MACD histogram = MACD - Signal
 
 # --- Trend Indicators ---
 stock_pd['ma_10'] = stock_pd['Close'].rolling(window=10).mean()
