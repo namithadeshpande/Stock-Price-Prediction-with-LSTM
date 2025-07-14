@@ -34,25 +34,31 @@ stock_pd['macd_signal'] = macd.macd_signal() # Signal line = 9-EMA of MACD line
 stock_pd['macd_diff'] = macd.macd_diff() # MACD histogram = MACD - Signal
 
 # --- Trend Indicators ---
+# 10-day Simple Moving Average (short-term trend) & 50-day Simple Moving Average (medium-term trend)
 stock_pd['ma_10'] = stock_pd['Close'].rolling(window=10).mean()
 stock_pd['ma_50'] = stock_pd['Close'].rolling(window=50).mean()
+# 10-day Exponential Moving Average (faster trend) & 20-day EMA (used in MACD and trend analysis)
 stock_pd['ema_10'] = stock_pd['Close'].ewm(span=10).mean()
 stock_pd['ema_20'] = stock_pd['Close'].ewm(span=20).mean()
 
 # Price-to-MA ratio
+# Price relative to 20-day moving average (trend distance)
 stock_pd['price_ma_ratio'] = stock_pd['Close'] / stock_pd['ma_20']
 
 # --- Volatility Indicators ---
+# 14-day rolling standard deviation of close (price volatility)
 stock_pd['rolling_std_14'] = stock_pd['Close'].rolling(window=14).std()
 
 atr = AverageTrueRange(high=stock_pd['High'], low=stock_pd['Low'], close=stock_pd['Close'], window=14)
-stock_pd['atr_14'] = atr.average_true_range()
+stock_pd['atr_14'] = atr.average_true_range() # Average True Range (14 days) - price range volatility
 
 bb = BollingerBands(close=stock_pd['Close'], window=20, window_dev=2)
-stock_pd['bb_lower'] = bb.bollinger_lband()
-stock_pd['bb_width'] = stock_pd['bb_upper'] - stock_pd['bb_lower']
+stock_pd['bb_upper'] = bb.bollinger_hband() # Upper Bollinger Band (mean + 2*std)
+stock_pd['bb_lower'] = bb.bollinger_lband() # Lower Bollinger Band (mean - 2*std)
+stock_pd['bb_width'] = stock_pd['bb_upper'] - stock_pd['bb_lower'] # Band width (volatility indicator)
 
 # --- Lag Features ---
+# Close, return, volume lagged by {lag} days
 lags = [1, 2, 3]
 for lag in lags:
     stock_pd[f'close_lag_{lag}'] = stock_pd['Close'].shift(lag)
