@@ -43,6 +43,7 @@ stock_pd['ema_20'] = stock_pd['Close'].ewm(span=20).mean()
 
 # Price-to-MA ratio
 # Price relative to 20-day moving average (trend distance)
+stock_pd['ma_20'] = stock_pd['Close'].rolling(window=20).mean()
 stock_pd['price_ma_ratio'] = stock_pd['Close'] / stock_pd['ma_20']
 
 # --- Volatility Indicators ---

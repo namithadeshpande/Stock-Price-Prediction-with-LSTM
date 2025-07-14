@@ -2,3 +2,4 @@ daily_job.sh
 spy_yf_daily_data.csv
 yf_data_update.log
 alpha_vantage_api_data.py
+yf_data_new_features.csv
