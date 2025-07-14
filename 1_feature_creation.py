@@ -8,7 +8,7 @@ from ta.momentum import RSIIndicator
 csv_file = "spy_yf_daily_data.csv"
 
 START_DATE = '2001-01-01'
-END_DATE = datetime.today().strftime('%Y-%m-%d')  
+END_DATE = '2025-06-30'
 
 # Load the CSV file
 stock_pd = pd.read_csv(csv_file, parse_dates=['Date'], index_col='Date')
@@ -73,5 +73,5 @@ stock_pd['quarter'] = stock_pd.index.quarter
 stock_pd['is_month_end'] = stock_pd.index.is_month_end.astype(int)
 stock_pd['is_quarter_end'] = stock_pd.index.is_quarter_end.astype(int)
 
-# --- Clean up ---
-stock_pd.dropna(inplace=True)  # Drop rows with NaNs caused by rolling/lags
+stock_pd.dropna(inplace=True)
+stock_pd.to_csv('yf_data_new_features.csv')  
